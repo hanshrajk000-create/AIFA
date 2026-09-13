@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hanshrajk000-create.github.io/AIFA/sitemap.xml
