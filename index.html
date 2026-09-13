@@ -1,3 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AIFA — All-in-One Intelligent and Functional Assistant</title>
+
+<meta name="description" content="AIFA is an all-in-one intelligent and functional AI assistant for learning, productivity, information, creativity and everyday tasks.">
+
+<meta name="keywords" content="AIFA, AI assistant, artificial intelligence, student AI, AI study assistant, all in one AI assistant">
+
+<meta name="author" content="AIFA">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://hanshrajk000-create.github.io/AIFA/">
+
+<meta property="og:title" content="AIFA — All-in-One Intelligent and Functional Assistant">
+<meta property="og:description" content="AIFA is an all-in-one intelligent assistant for learning, productivity, information, creativity and everyday tasks.">
+<meta property="og:url" content="https://hanshrajk000-create.github.io/AIFA/">
+<meta property="og:type" content="website">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --bg:#070707;
+    --panel:#101010;
+    --panel2:#151515;
+    --gold:#f5c542;
+    --gold2:#ffdf70;
+    --text:#f5f5f5;
+    --muted:#999;
+    --border:rgba(245,197,66,.18);
+}
+
+body{
+    background:
+        radial-gradient(circle at 80% 10%, rgba(245,197,66,.10), transparent 30%),
+        radial-gradient(circle at 20% 90%, rgba(245,197,66,.06), transparent 28%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:rgba(10,10,10,.96);
+    border-right:1px solid var(--border);
+    padding:22px 15px;
+    z-index:1000;
+    backdrop-filter:blur(15px);
+     
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:5px;
+    text-shadow:0 0 20px rgba(245,197,66,.35);
+}
+
+.logo-sub{
+    text-align:center;
+    color:#777;
+    font-size:10px;
+    letter-spacing:1px;
+    margin-bottom:28px;
+}
+
+.new-chat{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:#080808;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-bottom:20px;
+    box-shadow:0 0 20px rgba(245,197,66,.15);
+}
+
+.new-chat:hover{
+    transform:translateY(-1px);
+    box-shadow:0 0 25px rgba(245,197,66,.30);
+}
+
+.menu-title{
+    color:#666;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin:18px 10px 8px;
+}
+
+.menu-item{
+    width:100%;
+    padding:12px 13px;
+    margin:4px 0;
+    border:1px solid transparent;
+    background:transparent;
+    color:#ccc;
+    border-radius:10px;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.menu-item:hover,
+.menu-item.active{
+    background:rgba(245,197,66,.09);
+    border-color:var(--border);
+    color:var(--gold2);
+}
+
+.bottom-menu{
+            margin-top:auto;
+            padding-top:18px;
+            border-top:1px solid var(--border);
+}
+
+/* MAIN */
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+/* TOP BAR */
+
+.topbar{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    background:rgba(7,7,7,.75);
+    backdrop-filter:blur(15px);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.page-title{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+    color:#999;
+}
+
+/* OFFLINE GAME TOPBAR BUTTON */
+.offline-game-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 13px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:rgba(245,197,66,.07);
+    color:var(--gold2);
+    cursor:pointer;
+    font-size:12px;
+    font-weight:600;
+    transition:.2s ease;
+}
+.offline-game-btn:hover{
+    background:rgba(245,197,66,.14);
+    box-shadow:0 0 18px rgba(245,197,66,.18);
+    transform:translateY(-1px);
+}
+.offline-game-icon{
+    font-size:17px;
+    line-height:1;
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    background:#48d16a;
+    border-radius:50%;
+    box-shadow:0 0 10px #48d16a;
+}
+
+.profile{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    background:#121212;
+    font-weight:bold;
+}
+
+/* PAGE */
+
+.page{
+    display:none;
+    padding:40px;
+    max-width:1250px;
+    margin:auto;
+}
+
+.page.active{
+    display:block;
+}
+
+/* DASHBOARD */
+
+.welcome{
+    text-align:center;
+    padding:45px 20px 30px;
+}
+
+.welcome-badge{
+    display:inline-block;
+    border:1px solid var(--border);
+    background:rgba(245,197,66,.06);
+    color:var(--gold2);
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.welcome h1{
+    font-size:46px;
+    margin-bottom:12px;
+    background:linear-gradient(90deg,#fff,var(--gold2),#fff);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.welcome p{
+    max-width:650px;
+    margin:auto;
+    color:#999;
+    line-height:1.7;
+}
+
+/* CHAT */
+
+.chat-container{
+    max-width:850px;
+    margin:20px auto;
+    border:1px solid var(--border);
+    background:rgba(15,15,15,.85);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 70px rgba(0,0,0,.4);
+}
+
+.chat-header{
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.ai-name{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.ai-icon{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--gold),#9d7300);
+    color:#080808;
+    font-weight:bold;
+}
+
+.demo{
+    font-size:11px;
+    color:#777;
+    border:1px solid #252525;
+    padding:5px 9px;
+    border-radius:20px;
+}
+
+.messages{
+    height:330px;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.message{
+    margin-bottom:15px;
+    max-width:80%;
+    padding:12px 15px;
+    border-radius:14px;
+    line-height:1.5;
+    font-size:14px;
+    white-space:pre-wrap;
+}
+
+.bot{
+    background:#171717;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.user{
+    background:rgba(245,197,66,.13);
+    border:1px solid var(--border);
+    margin-left:auto;
+}
+
+.input-area{
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,.06);
+    display:flex;
+    gap:10px;
+}
+
+.input-area input{
+    flex:1;
+    background:#0b0b0b;
+    border:1px solid #252525;
+    color:white;
+    outline:none;
+    padding:13px 15px;
+    border-radius:12px;
+}
+
+.input-area input:focus{
+    border-color:rgba(245,197,66,.45);
+}
+
+.send-btn{
+    border:none;
+    background:var(--gold);
+    color:#080808;
+    padding:0 20px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* QUICK ACTIONS */
+
+.quick-title{
+    margin:45px 0 15px;
+    font-size:18px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.card{
+    padding:22px;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(17,17,17,.7);
+    border-radius:16px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    border-color:var(--border);
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.card-icon{
+    font-size:25px;
+    margin-bottom:13px;
+}
+
+.card h3{
+    margin-bottom:7px;
+    font-size:16px;
+}
+
+.card p{
+    color:#888;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* STUDENT */
+
+.section-heading{
+    margin-bottom:25px;
+}
+
+.section-heading h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.section-heading p{
+    color:#888;
+}
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.subject{
+    min-height:140px;
+    border:1px solid rgba(255,255,255,.07);
+    background:#111;
+    border-radius:16px;
+    padding:22px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.subject:hover{
+    border-color:var(--border);
+    transform:translateY(-3px);
+}
+
+.subject-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.subject h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.subject p{
+    color:#777;
+    font-size:12px;
+}
+
+/* EXPLORE */
+
+.explore-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.explore-card{
+    padding:25px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:17px;
+}
+
+.explore-card h3{
+    margin-bottom:8px;
+}
+
+.explore-card p{
+    color:#888;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* SETTINGS */
+
+.settings-box{
+    max-width:700px;
+}
+
+.setting{
+    padding:20px;
+    background:#111;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    margin-bottom:12px;
+}
+
+.setting h3{
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.setting p{
+    color:#777;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+    background:none;
+    border:none;
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .page{
+        padding:25px 16px;
+    }
+
+    .welcome h1{
+        font-size:34px;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .subject-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .explore-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .status{
+        display:none;
+    }
+
+    .cards,
+    .subject-grid{
+        grid-template-columns:1fr;
+    }
+
+    .messages{
+        height:300px;
+    }
+
+    .message{
+        max-width:90%;
+    }
+
+    .welcome{
+        padding-top:25px;
+    }
+
+    .welcome h1{
+        font-size:30px;
+    }
+
+    .input-area{
+        padding:10px;
+    }
+
+    .send-btn{
+        padding:0 15px;
+    }
+}
+/* PEOPLE & CHATS DESIGN */
+
+.people-search{
+    margin:20px 0;
+}
+
+.people-search input{
+    width:100%;
+    padding:15px 18px;
+    background:#111;
+    border:1px solid var(--border);
+    border-radius:12px;
+    color:white;
+    outline:none;
+    font-size:14px;
+    box-sizing:border-box;
+}
+
+.people-search input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 15px rgba(245,197,66,.12);
+}
+
+.people-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.people-panel{
+    background:rgba(16,16,16,.85);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+}
+
+.people-panel h2{
+    margin-top:0;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.person-card{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    margin:8px 0;
+    background:#111;
+    border:1px solid rgba(245,197,66,.08);
+    border-radius:12px;
+    transition:.2s;
+}
+
+.person-card:hover{
+    border-color:var(--border);
+    transform:translateY(-1px);
+}
+
+.person-avatar{
+    width:42px;
+    height:42px;
+    min-width:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#f5c542,#8f6c00);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.person-info{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.person-info strong{
+    color:white;
+}
+
+.person-info span{
+    color:#999;
+    font-size:12px;
+}
+
+.online-dot,
+.offline-dot{
+    width:9px;
+    height:9px;
+    min-width:9px;
+    border-radius:50%;
+}
+
+.online-dot{
+    background:#4caf50;
+    box-shadow:0 0 8px rgba(76,175,80,.7);
+}
+
+.offline-dot{
+    background:#666;
+}
+
+.chat-btn{
+    border:1px solid var(--gold);
+    background:transparent;
+    color:var(--gold);
+    padding:7px 13px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.chat-btn:hover{
+    background:var(--gold);
+    color:#111;
+}
+
+.demo-chat{
+    display:none;
+    margin-top:20px;
+    background:#0e0e0e;
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.demo-chat.active{
+    display:block;
+}
+
+.demo-chat-header{
+    padding:15px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid var(--border);
+}
+
+.demo-chat-header div{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.demo-chat-header span{
+    color:#4caf50;
+    font-size:12px;
+}
+
+.demo-chat-header button{
+    background:none;
+    border:0;
+    color:#aaa;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.demo-messages{
+    height:250px;
+    padding:18px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.demo-message{
+    max-width:70%;
+    padding:10px 13px;
+    border-radius:12px;
+    font-size:14px;
+}
+
+.demo-message.received{
+    align-self:flex-start;
+    background:#1b1b1b;
+    color:#ddd;
+}
+
+.demo-message.sent{
+    align-self:flex-end;
+    background:#f5c542;
+    color:#111;
+}
+
+.demo-input{
+    display:flex;
+    gap:10px;
+    padding:12px;
+    border-top:1px solid var(--border);
+}
+
+.demo-input input{
+    flex:1;
+    padding:12px;
+    background:#151515;
+    border:1px solid var(--border);
+    border-radius:10px;
+    color:white;
+    outline:none;
+}
+
+.demo-input button{
+    width:45px;
+    border:0;
+    border-radius:10px;
+    background:var(--gold);
+    color:#111;
+    cursor:pointer;
+    font-size:18px;
+}
+
+@media(max-width:900px){
+
+    .people-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+/* FEEDBACK & SUGGESTIONS */
+
+.feedback-card{
+    max-width:850px;
+    margin:30px auto;
+    padding:28px;
+    background:rgba(16,16,16,.88);
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 0 30px rgba(245,197,66,.06);
+}
+
+.feedback-type{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.feedback-option{
+    padding:14px;
+    background:#111;
+    border:1px solid rgba(245,197,66,.15);
+    color:#bbb;
+    border-radius:11px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.feedback-option:hover,
+.feedback-option.active{
+    border-color:var(--gold);
+    color:var(--gold);
+    background:rgba(245,197,66,.07);
+}
+
+.feedback-card input,
+.feedback-card textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:14px 16px;
+    margin-bottom:15px;
+    background:#0d0d0d;
+    border:1px solid rgba(245,197,66,.15);
+    border-radius:11px;
+    color:white;
+    outline:none;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.feedback-card input:focus,
+.feedback-card textarea:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 15px rgba(245,197,66,.1);
+}
+
+.feedback-card textarea{
+    resize:vertical;
+}
+
+.feedback-submit{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    background:linear-gradient(135deg,#f5c542,#d9a900);
+    color:#111;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.feedback-submit:hover{
+    transform:translateY(-1px);
+    box-shadow:0 0 20px rgba(245,197,66,.25);
+}
+
+.feedback-status{
+    text-align:center;
+    margin:15px 0 0;
+    color:var(--gold);
+    font-size:13px;
+}
+
+@media(max-width:700px){
+
+    .feedback-card{
+        padding:18px;
+    }
+
+    .feedback-type{
+        grid-template-columns:1fr;
+    }
+
+}
+
+/* GAMES */
+.games-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+    margin-top:24px;
+}
+.game-card{
+    background:linear-gradient(145deg,rgba(245,197,66,.08),rgba(255,255,255,.025));
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:22px;
+    cursor:pointer;
+    transition:.2s;
+}
+.game-card:hover{transform:translateY(-3px);box-shadow:0 0 24px rgba(245,197,66,.12);border-color:var(--gold);}
+.game-icon{font-size:38px;margin-bottom:12px;}
+.game-card h3{margin-bottom:7px;}
+.game-card p{color:var(--muted);font-size:13px;line-height:1.5;}
+.game-panel{
+    margin-top:24px;
+    background:rgba(15,15,15,.92);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:24px;
+    min-height:260px;
+}
+.game-panel h2{margin-bottom:8px;}
+.game-panel-sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+.game-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.game-btn{padding:11px 16px;border:1px solid var(--border);border-radius:10px;background:#171717;color:#eee;cursor:pointer;}
+.game-btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#111;border:0;font-weight:bold;}
+.game-score{color:var(--gold);font-weight:bold;margin:10px 0;}
+#runnerCanvas,#ballCanvas,#targetCanvas{width:100%;max-width:720px;height:auto;display:block;background:#090909;border:1px solid var(--border);border-radius:14px;touch-action:none;}
+.tic-board{display:grid;grid-template-columns:repeat(3,72px);gap:8px;margin:18px 0;}
+.tic-cell{width:72px;height:72px;border:1px solid var(--border);background:#111;border-radius:10px;color:var(--gold);font-size:28px;font-weight:bold;cursor:pointer;}
+@media(max-width:700px){.game-panel{padding:16px}.tic-board{grid-template-columns:repeat(3,64px)}.tic-cell{width:64px;height:64px}}
+
+/* ===== FULL SCREEN OFFLINE GAME INTERFACE ===== */
+
+.game-fullscreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#090909;
+    display:none;
+    overflow-y:auto;
+    padding:30px;
+}
+
+.game-fullscreen.active{
+    display:block;
+}
+
+.game-topbar{
+    max-width:1200px;
+    margin:0 auto 35px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.game-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.game-brand-icon{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(245,197,66,.12);
+    border:1px solid rgba(245,197,66,.35);
+    box-shadow:0 0 25px rgba(245,197,66,.15);
+    font-size:25px;
+}
+
+.game-brand h1{
+    margin:0;
+    color:#f5c542;
+    font-size:25px;
+}
+
+.game-brand p{
+    margin:3px 0 0;
+    color:#888;
+    font-size:13px;
+}
+
+.game-close{
+    border:1px solid rgba(245,197,66,.3);
+    background:#151515;
+    color:#f5c542;
+    padding:11px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.game-close:hover{
+    background:#f5c542;
+    color:#111;
+}
+
+.game-selection{
+    max-width:1200px;
+    margin:auto;
+}
+
+.game-selection-title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.game-selection-title h2{
+    font-size:38px;
+    margin:0 0 10px;
+    color:#fff;
+}
+
+.game-selection-title p{
+    color:#888;
+    margin:0;
+}
+
+.game-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.game-choice{
+    background:linear-gradient(145deg,#151515,#0e0e0e);
+    border:1px solid rgba(245,197,66,.18);
+    border-radius:22px;
+    padding:30px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.game-choice:hover{
+    transform:translateY(-7px);
+    border-color:#f5c542;
+    box-shadow:0 0 30px rgba(245,197,66,.16);
+}
+
+.game-choice-icon{
+    font-size:55px;
+    margin-bottom:18px;
+}
+
+.game-choice h3{
+    color:#fff;
+    margin:0 0 8px;
+    font-size:20px;
+}
+
+.game-choice p{
+    color:#888;
+    margin:0;
+    font-size:13px;
+}
+
+.game-area{
+    max-width:1000px;
+    margin:25px auto 0;
+}
+
+@media(max-width:900px){
+    .game-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .game-fullscreen{
+        padding:18px;
+    }
+
+    .game-grid{
+        grid-template-columns:1fr;
+    }
+
+    .game-selection-title h2{
+        font-size:29px;
+    }
+}
+/* ===== DEDICATED GAME INTERFACE ===== */
+.game-screen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#080808;
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+}
+
+.game-screen.active{
+    display:flex;
+}
+
+.game-screen-top{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 24px;
+    border-bottom:1px solid rgba(255,193,7,.25);
+    background:rgba(10,10,10,.96);
+}
+
+.game-screen-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.game-screen-title .icon{
+    font-size:30px;
+}
+
+.game-screen-title h2{
+    margin:0;
+    color:#ffd54a;
+    font-size:20px;
+}
+
+.game-back{
+    border:1px solid rgba(255,193,7,.35);
+    background:rgba(255,193,7,.08);
+    color:#ffd54a;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.game-screen-body{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.game-screen-body .game-panel{
+    width:min(1000px,95vw);
+    max-height:85vh;
+    overflow:auto;
+}
+/* AIFA SEO INTRO */
+.seo-intro{
+    margin: 25px auto 10px;
+    padding: 24px 30px;
+    max-width: 900px;
+    text-align: center;
+    background: rgba(255,193,7,0.04);
+    border: 1px solid rgba(255,193,7,0.18);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(255,193,7,0.06);
+}
+
+.seo-intro h1{
+    margin: 0 0 10px;
+    color: #ffd54a;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 0 14px rgba(255,193,7,0.35);
+}
+
+.seo-intro p{
+    margin: 0;
+    color: #cfcfcf;
+    font-size: 15px;
+    line-height: 1.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">AIFA</div>
+    <div class="logo-sub">INTELLIGENT • FUNCTIONAL • ASSISTANT</div>
+
+    <button class="new-chat" onclick="newChat()">＋ New Chat</button>
+
+    <div class="menu-title">Workspace</div>
+
+    <button class="menu-item active" onclick="showPage('home',this)">
+        🏠 &nbsp; Home
+    </button>
+
+    <button class="menu-item" onclick="showPage('student',this)">
+        🎓 &nbsp; Student Mode
+    </button>
+
+    
+    <button class="menu-item" onclick="showPage('explore',this)">
+        ✨ &nbsp; Explore
+    </button>
+
+    <div class="menu-title">Your AIFA</div>
+    <div class="menu-title">Connect</div>
+
+    <button class="menu-item" onclick="showPage('people',this)">
+    👥 &nbsp; People & Chats
+   </button>
+   
+   <div class="menu-title">Help & Feedback</div>
+
+<button class="menu-item" onclick="showPage('feedback',this)">
+    💡 &nbsp; Suggestions & Feedback
+</button>
+
+    <button class="menu-item" onclick="showPage('history',this)">
+        🕘 &nbsp; Chat History
+    </button>
+
+    <button class="menu-item" onclick="showPage('settings',this)">
+        ⚙️ &nbsp; Settings
+    </button>
+
+    <div class="bottom-menu">
+        <button class="menu-item" onclick="login()">
+            👤 &nbsp; Login / Sign Up
+        </button>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div style="display:flex;align-items:center;gap:15px;">
+
+            <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
+
+            <div class="page-title" id="pageTitle">
+                AIFA Home
+            </div>
+
+        </div>
+
+        <div style="display:flex;align-items:center;gap:20px;">
+
+            <button class="offline-game-btn" onclick="showPage('games',this)" title="Open Offline Games">
+                <span class="offline-game-icon">🎮</span>
+                <span>Offline Game</span>
+            </button>
+
+            <div class="profile">A</div>
+
+        </div>
+
+    </header>
+
+
+    <!-- HOME -->
+ 
+   <section class="seo-intro">
+    <h1>AIFA — All-in-One Intelligent and Functional Assistant</h1>
+    <p>
+        AIFA is an intelligent AI assistant for learning, productivity,
+        information, creativity and everyday tasks.
+    </p>
+</section>
+
+    <section class="page active" id="home">
+
+        <div class="welcome">
+
+            <div class="welcome-badge">
+                ✦ THE NEXT GENERATION AI ASSISTANT
+            </div>
+
+            <h1>What can AIFA do for you?</h1>
+
+            <p>
+                Your future all-in-one intelligent assistant for learning,
+                productivity, information, creativity and everyday tasks.
+            </p>
+
+        </div>
+
+
+        <div class="chat-container">
+
+            <div class="chat-header">
+
+                <div class="ai-name">
+
+                    <div class="ai-icon">A</div>
+
+                    <div>
+                        <strong>AIFA AI</strong>
+                        <div style="font-size:11px;color:#777;">
+                            Intelligent Assistant
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="demo">
+                    DEMO MODE
+                </div>
+
+            </div>
+
+
+            <div class="messages" id="messages">
+
+                <div class="message bot">
+                    👋 Hello! I'm AIFA.
+
+                    I'm currently running in Demo Mode.
+                    Ask me something and let's test the interface!
+                </div>
+
+            </div>
+
+
+            <div class="input-area">
+
+                <input
+                    id="messageInput"
+                    type="text"
+                    placeholder="Ask AIFA anything..."
+                    onkeydown="handleEnter(event)"
+                >
+
+                <button class="send-btn" onclick="sendMessage()">
+                    Send
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <h2 class="quick-title">Quick Actions</h2>
+
+        <div class="cards">
+
+            <div class="card" onclick="openStudent()">
+                <div class="card-icon">🎓</div>
+                <h3>Student Mode</h3>
+                <p>
+                    Solve doubts, learn concepts and prepare for exams.
+                </p>
+            </div>
+
+            <div class="card" onclick="askDemo('Explain something to me')">
+                <div class="card-icon">🧠</div>
+                <h3>Ask AIFA</h3>
+                <p>
+                    Ask questions and get intelligent answers.
+                </p>
+            </div>
+
+            <div class="card" onclick="showPage('explore',null)">
+                <div class="card-icon">✨</div>
+                <h3>Explore</h3>
+                <p>
+                    Discover the future features of AIFA.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDENT MODE -->
+
+    <section class="page" id="student">
+
+        <div class="section-heading">
+
+            <h1>🎓 Student Mode</h1>
+
+            <p>
+                Your dedicated study assistant — from basic concepts to exam preparation.
+            </p>
+
+        </div>
+
+
+        <div class="subject-grid">
+
+            <div class="subject" onclick="askDemo('Help me with Physics')">
+                <div class="subject-icon">⚛️</div>
+                <h3>Physics</h3>
+                <p>Concepts, numericals & problems</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with Chemistry')">
+                <div class="subject-icon">🧪</div>
+                <h3>Chemistry</h3>
+                <p>Reactions, concepts & practice</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with Mathematics')">
+                <div class="subject-icon">📐</div>
+                <h3>Mathematics</h3>
+                <p>Problems, formulas & solutions</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with Biology')">
+                <div class="subject-icon">🧬</div>
+                <h3>Biology</h3>
+                <p>Concepts, diagrams & revision</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with English')">
+                <div class="subject-icon">📖</div>
+                <h3>English</h3>
+                <p>Grammar, writing & literature</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with Hindi')">
+                <div class="subject-icon">अ</div>
+                <h3>Hindi</h3>
+                <p>Language & literature</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Help me with Computer Science')">
+                <div class="subject-icon">💻</div>
+                <h3>Computer Science</h3>
+                <p>Programming & concepts</p>
+            </div>
+
+            <div class="subject" onclick="askDemo('Give me a practice test')">
+                <div class="subject-icon">📝</div>
+                <h3>Practice & Tests</h3>
+                <p>Questions, quizzes & revision</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXPLORE -->
+
+    <section class="page" id="explore">
+
+        <div class="section-heading">
+
+            <h1>✨ Explore AIFA</h1>
+
+            <p>
+                Features we're building into the AIFA ecosystem.
+            </p>
+
+        </div>
+
+
+        <div class="explore-grid">
+
+            <div class="explore-card">
+                <h3>🌐 Live Information</h3>
+                <p>
+                    When online, AIFA will be designed to work with current
+                    information such as news and other up-to-date data.
+                </p>
+            </div>
+
+            <div class="explore-card">
+                <h3>🌍 Multilingual AI</h3>
+                <p>
+                    Communicate with AIFA across multiple languages and switch
+                    languages naturally.
+                </p>
+            </div>
+
+            <div class="explore-card">
+                <h3>📷 Image & File Understanding</h3>
+                <p>
+                    Future versions can let users upload images and documents
+                    for analysis and study help.
+                </p>
+            </div>
+
+            <div class="explore-card">
+                <h3>🔊 Voice Assistant</h3>
+                <p>
+                    Voice interaction can be added later for a more natural
+                    assistant experience.
+                </p>
+            </div>
+
+            <div class="explore-card">
+                <h3>☁️ Online + Offline</h3>
+                <p>
+                    AIFA is planned with both online intelligence and useful
+                    offline capabilities.
+                </p>
+            </div>
+
+            <div class="explore-card">
+                <h3>🔐 Personal Account</h3>
+                <p>
+                    Login, saved chats, preferences and personalized features
+                    can be connected later.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section class="page" id="history">
+
+        <div class="section-heading">
+
+            <h1>🕘 Chat History</h1>
+
+            <p>
+                Your conversations saved on this browser.
+            </p>
+
+        </div>
+
+        <div id="historyList"></div>
+
+    </section>
+
+    <!-- PEOPLE & CHATS -->
+
+<section class="page" id="people">
+
+    <div class="section-heading">
+        <h1>👥 People & Chats</h1>
+        <p>Connect, chat and study with people on AIFA.</p>
+    </div>
+
+    <div class="people-search">
+        <input
+            type="text"
+            id="peopleSearch"
+            placeholder="🔍 Search people by name..."
+            oninput="searchPeople()"
+        >
+    </div>
+
+    <div class="people-grid">
+
+        <div class="people-panel">
+
+            <h2>💬 Recent Chats</h2>
+
+            <div class="person-card" onclick="openDemoChat('Aarav')">
+                <div class="person-avatar">A</div>
+
+                <div class="person-info">
+                    <strong>Aarav</strong>
+                    <span>Hey! What's up?</span>
+                </div>
+
+                <div class="online-dot"></div>
+            </div>
+
+            <div class="person-card" onclick="openDemoChat('Priya')">
+                <div class="person-avatar">P</div>
+
+                <div class="person-info">
+                    <strong>Priya</strong>
+                    <span>Can you help me with Maths?</span>
+                </div>
+
+                <div class="offline-dot"></div>
+            </div>
+
+        </div>
+
+        <div class="people-panel">
+
+            <h2>🌐 People</h2>
+
+            <div class="person-card searchable-person">
+                <div class="person-avatar">A</div>
+
+                <div class="person-info">
+                    <strong>Aarav</strong>
+                    <span>🟢 Online</span>
+                </div>
+
+                <button class="chat-btn"
+                        onclick="openDemoChat('Aarav')">
+                    Chat
+                </button>
+            </div>
+
+            <div class="person-card searchable-person">
+                <div class="person-avatar">P</div>
+
+                <div class="person-info">
+                    <strong>Priya</strong>
+                    <span>🟢 Online</span>
+                </div>
+
+                <button class="chat-btn"
+                        onclick="openDemoChat('Priya')">
+                    Chat
+                </button>
+            </div>
+
+            <div class="person-card searchable-person">
+                <div class="person-avatar">R</div>
+
+                <div class="person-info">
+                    <strong>Rahul</strong>
+                    <span>⚪ Offline</span>
+                </div>
+
+                <button class="chat-btn"
+                        onclick="openDemoChat('Rahul')">
+                    Chat
+                </button>
+            </div>
+
+            <div class="person-card searchable-person">
+                <div class="person-avatar">S</div>
+
+                <div class="person-info">
+                    <strong>Sneha</strong>
+                    <span>🟢 Online</span>
+                </div>
+
+                <button class="chat-btn"
+                        onclick="openDemoChat('Sneha')">
+                    Chat
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="demo-chat" id="demoChat">
+
+        <div class="demo-chat-header">
+            <div>
+                <strong id="chatPersonName">Aarav</strong>
+                <span>🟢 Online</span>
+            </div>
+
+            <button onclick="closeDemoChat()">✕</button>
+        </div>
+
+        <div class="demo-messages" id="demoMessages">
+
+            <div class="demo-message received">
+                Hey! 👋
+            </div>
+
+        </div>
+
+        <div class="demo-input">
+
+            <input
+                type="text"
+                id="demoMessageInput"
+                placeholder="Type a message..."
+                onkeydown="if(event.key==='Enter') sendDemoMessage()"
+            >
+
+            <button onclick="sendDemoMessage()">➤</button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FEEDBACK & SUGGESTIONS -->
+
+<section class="page" id="feedback">
+
+    <div class="section-heading">
+        <h1>💡 Suggestions & Feedback</h1>
+        <p>Help us make AIFA better. Your ideas matter.</p>
+    </div>
+
+    <div class="feedback-card">
+
+        <div class="feedback-type">
+            <button class="feedback-option active" onclick="selectFeedbackType(this,'suggestion')">
+                💡 Suggest a Feature
+            </button>
+
+            <button class="feedback-option" onclick="selectFeedbackType(this,'feedback')">
+                ⭐ Give Feedback
+            </button>
+
+            <button class="feedback-option" onclick="selectFeedbackType(this,'problem')">
+                🐛 Report a Problem
+            </button>
+        </div>
+
+        <input
+            type="text"
+            id="feedbackName"
+            placeholder="Your name (optional)"
+        >
+
+        <textarea
+            id="feedbackMessage"
+            placeholder="Write your suggestion or feedback here..."
+            rows="6"
+        ></textarea>
+
+        <button class="feedback-submit" onclick="submitFeedback()">
+            Send Feedback 🚀
+        </button>
+
+        <p id="feedbackStatus" class="feedback-status"></p>
+
+    </div>
+
+</section>
+
+<!-- GAMES -->
+<section class="page" id="games">
+    <div class="section-heading">
+        <h1>🎮 AIFA Games</h1>
+        <p>Fun, family-friendly games that can run directly inside AIFA.</p>
+    </div>
+
+    <div class="games-grid">
+        <div class="game-card" onclick="openGame('runner')">
+            <div class="game-icon">🏃</div><h3>Endless Runner</h3>
+            <p>Run, jump and avoid obstacles. Simple offline arcade fun.</p>
+        </div>
+        <div class="game-card" onclick="openGame('ball')">
+            <div class="game-icon">⚽</div><h3>Ball Challenge</h3>
+            <p>Tap or click the ball to score as many points as possible.</p>
+        </div>
+        <div class="game-card" onclick="openGame('target')">
+            <div class="game-icon">🎯</div><h3>Target Challenge</h3>
+            <p>Hit the moving targets before time runs out.</p>
+        </div>
+        <div class="game-card" onclick="openGame('tic')">
+            <div class="game-icon">❌⭕</div><h3>Tic-Tac-Toe</h3>
+            <p>A quick two-player-style classic against AIFA.</p>
+        </div>
+    </div>
+
+    <div class="game-panel" id="gamePanel">
+        <h2>🎮 Choose a game</h2>
+        <p class="game-panel-sub">Select any game above to start. These mini-games are designed to work without an internet connection.</p>
+    </div>
+</section>
+
+    <!-- SETTINGS -->
+
+    <section class="page" id="settings">
+
+        <div class="section-heading">
+
+            <h1>⚙️ Settings</h1>
+
+            <p>
+                Manage your AIFA preferences.
+            </p>
+
+        </div>
+
+
+        <div class="settings-box">
+
+            <div class="setting">
+                <h3>🤖 AI Mode</h3>
+                <p>
+                    Demo Mode is currently active. Real AI connection will be
+                    connected through the secure backend later.
+                </p>
+            </div>
+
+            <div class="setting">
+                <h3>🌐 Internet Intelligence</h3>
+                <p>
+                    Live web information will be added in a future stage.
+                </p>
+            </div>
+
+            <div class="setting">
+                <h3>🎓 Student Mode</h3>
+                <p>
+                    Subject-based learning tools are available in the current UI.
+                </p>
+            </div>
+
+            <div class="setting">
+                <h3>🗑️ Clear Local History</h3>
+                <p>
+                    <button
+                        onclick="clearHistory()"
+                        style="margin-top:10px;padding:9px 14px;border-radius:8px;border:1px solid #333;background:#191919;color:#ddd;cursor:pointer;"
+                    >
+                        Clear History
+                    </button>
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
 function closeDedicatedGame(){
 
     const screen = document.getElementById("dedicatedGameScreen");
@@ -27,3 +1884,686 @@ function closeDedicatedGame(){
 
     showPage("games", null, false);
 }
+/* PAGE SWITCHING */
+
+  
+  /* ===== AIFA INTERNAL NAVIGATION + PHONE BACK ===== */
+
+function showPage(pageId, button, addHistory = true){
+
+    document.querySelectorAll(".page").forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    const page = document.getElementById(pageId);
+
+    if(!page) return;
+
+    page.classList.add("active");
+
+    document.querySelectorAll(".menu-item").forEach(item=>{
+        item.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    const titles = {
+        home:"AIFA Home",
+        student:"Student Mode",
+        explore:"Explore AIFA",
+        history:"Chat History",
+        settings:"Settings",
+        people:"People & Chats",
+        feedback:"Suggestions & Feedback",
+        games:"AIFA Games"
+    };
+
+    document.getElementById("pageTitle").textContent =
+        titles[pageId] || "AIFA";
+
+    if(pageId === "history"){
+        loadHistory();
+    }
+
+    closeSidebar();
+
+    /* Save this screen in browser history */
+    if(addHistory){
+        history.pushState(
+            { aifaPage: pageId },
+            "",
+            "#" + pageId
+        );
+    }
+}
+
+
+/* Phone/browser Back button */
+window.addEventListener("popstate", function(event){
+
+    const state = event.state;
+
+    if(state && state.aifaPage){
+
+        showPage(
+            state.aifaPage,
+            null,
+            false
+        );
+
+    }else{
+
+        /* If no AIFA page is stored, return to Home */
+        showPage("home", null, false);
+
+    }
+
+});
+
+
+/* Create the first AIFA history state */
+if(!history.state || !history.state.aifaPage){
+
+    history.replaceState(
+        { aifaPage:"home" },
+        "",
+        "#home"
+    );
+
+} 
+        
+
+/* CHAT */
+
+function sendMessage(){
+
+    const input = document.getElementById("messageInput");
+
+    const text = input.value.trim();
+
+    if(!text) return;
+
+    addMessage(text,"user");
+
+    input.value = "";
+
+    saveHistory(text);
+
+    setTimeout(()=>{
+
+        addMessage(
+            "🤖 AIFA Demo:\n\nI received your message!\n\nReal AI intelligence will be connected to this interface in the next development stage.",
+            "bot"
+        );
+
+    },700);
+}
+
+
+function addMessage(text,type){
+
+    const messages = document.getElementById("messages");
+
+    const div = document.createElement("div");
+
+    div.className = "message " + type;
+
+    div.textContent = text;
+
+    messages.appendChild(div);
+
+    messages.scrollTop = messages.scrollHeight;
+}
+
+
+function handleEnter(event){
+
+    if(event.key === "Enter"){
+        sendMessage();
+    }
+
+}
+
+
+function askDemo(text){
+
+    showPage("home",null);
+
+    document.getElementById("messageInput").value = text;
+
+    document.getElementById("messageInput").focus();
+}
+
+
+function openStudent(){
+
+    const buttons = document.querySelectorAll(".menu-item");
+
+    showPage("student",buttons[1]);
+
+}
+
+/* NEW CHAT */
+
+function newChat(){
+
+    document.getElementById("messages").innerHTML = `
+        <div class="message bot">
+            👋 New chat started!
+
+            I'm AIFA. What would you like to ask?
+        </div>
+    `;
+
+    showPage("home",null);
+
+}
+
+
+/* HISTORY */
+
+function saveHistory(text){
+
+    let history = JSON.parse(
+        localStorage.getItem("aifaHistory") || "[]"
+    );
+
+    history.unshift({
+        text:text,
+        time:new Date().toLocaleString()
+    });
+
+    history = history.slice(0,30);
+
+    localStorage.setItem(
+        "aifaHistory",
+        JSON.stringify(history)
+    );
+
+}
+
+
+function loadHistory(){
+
+    const container = document.getElementById("historyList");
+
+    const history = JSON.parse(
+        localStorage.getItem("aifaHistory") || "[]"
+    );
+
+    if(history.length === 0){
+
+        container.innerHTML = `
+            <div class="setting">
+                <h3>No chats yet</h3>
+                <p>Your future conversations will appear here.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = history.map(item=>`
+
+        <div class="setting">
+            <h3>💬 ${escapeHtml(item.text)}</h3>
+            <p>${item.time}</p>
+        </div>
+
+    `).join("");
+
+}
+
+
+function escapeHtml(text){
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+function clearHistory(){
+
+    localStorage.removeItem("aifaHistory");
+
+    loadHistory();
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+    alert(
+        "AIFA Login / Sign Up\n\nMobile OTP and Google Login will be connected in a later stage."
+    );
+
+}
+
+
+/* MOBILE SIDEBAR */
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+function closeSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.remove("open");
+
+}
+/* PEOPLE & CHATS */
+
+function openDemoChat(name){
+    document.getElementById("demoChat").classList.add("active");
+
+    document.getElementById("chatPersonName").textContent = name;
+
+    document.getElementById("demoMessages").innerHTML = `
+        <div class="demo-message received">
+            Hey! 👋 I'm ${name}.
+        </div>
+    `;
+
+    document.getElementById("demoChat").scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
+}
+
+function closeDemoChat(){
+    document.getElementById("demoChat").classList.remove("active");
+}
+
+function sendDemoMessage(){
+
+    const input = document.getElementById("demoMessageInput");
+    const message = input.value.trim();
+
+    if(!message) return;
+
+    const messages = document.getElementById("demoMessages");
+
+    messages.innerHTML += `
+        <div class="demo-message sent">
+            ${message}
+        </div>
+    `;
+
+    input.value = "";
+
+    messages.scrollTop = messages.scrollHeight;
+
+    setTimeout(()=>{
+
+        messages.innerHTML += `
+            <div class="demo-message received">
+                This is a demo chat 🤖. Real messaging will be connected later.
+            </div>
+        `;
+
+        messages.scrollTop = messages.scrollHeight;
+
+    },700);
+}
+
+function searchPeople(){
+
+    const search = document
+        .getElementById("peopleSearch")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll(".searchable-person").forEach(person => {
+
+        const name = person
+            .querySelector("strong")
+            .textContent
+            .toLowerCase();
+
+        person.style.display =
+            name.includes(search) ? "flex" : "none";
+
+    });
+}
+
+/* GAMES */
+let gameTimer=null;
+let gameAnimation=null;
+
+ function openGame(game){
+
+         history.pushState(
+        { aifaPage:"games", aifaGame:game },
+        "",
+        "#games-" + game
+    );   
+
+    const screen = document.getElementById("dedicatedGameScreen");
+    const panel = document.getElementById("dedicatedGamePanel");
+    const title = document.getElementById("dedicatedGameTitle");
+    const icon = document.getElementById("dedicatedGameIcon");
+
+    if(gameTimer){
+        clearInterval(gameTimer);
+        gameTimer = null;
+    }
+
+    if(gameAnimation){
+        cancelAnimationFrame(gameAnimation);
+        gameAnimation = null;
+    }
+
+    if(game === "runner"){
+
+        title.textContent = "Endless Runner";
+        icon.textContent = "🏃";
+
+        panel.innerHTML = `
+            <h2>🏃 Endless Runner</h2>
+            <p class="game-panel-sub">
+                Press Space / tap the game to jump over obstacles.
+            </p>
+
+            <div class="game-score" id="runnerScore">
+                Score: 0
+            </div>
+
+            <canvas id="runnerCanvas"
+                    width="720"
+                    height="260">
+            </canvas>
+
+            <div class="game-actions">
+                <button class="game-btn primary"
+                        onclick="startRunner()">
+                    Start / Restart
+                </button>
+            </div>
+        `;
+
+        screen.classList.add("active");
+
+        startRunner();
+
+    }
+
+    else if(game === "ball"){
+
+        title.textContent = "Ball Challenge";
+        icon.textContent = "⚽";
+
+        panel.innerHTML = `
+            <h2>⚽ Ball Challenge</h2>
+
+            <p class="game-panel-sub">
+                Click or tap the ball. You have 20 seconds.
+            </p>
+
+            <div class="game-score" id="ballScore">
+                Score: 0 | Time: 20
+            </div>
+
+            <canvas id="ballCanvas"
+                    width="720"
+                    height="320">
+            </canvas>
+
+            <div class="game-actions">
+                <button class="game-btn primary"
+                        onclick="startBall()">
+                    Start / Restart
+                </button>
+            </div>
+        `;
+
+        screen.classList.add("active");
+
+        startBall();
+
+    }
+
+    else if(game === "target"){
+
+        title.textContent = "Target Challenge";
+        icon.textContent = "🎯";
+
+        panel.innerHTML = `
+            <h2>🎯 Target Challenge</h2>
+
+            <p class="game-panel-sub">
+                Click the target as it moves. You have 20 seconds.
+            </p>
+
+            <div class="game-score" id="targetScore">
+                Score: 0 | Time: 20
+            </div>
+
+            <canvas id="targetCanvas"
+                    width="720"
+                    height="320">
+            </canvas>
+
+            <div class="game-actions">
+                <button class="game-btn primary"
+                        onclick="startTarget()">
+                    Start / Restart
+                </button>
+            </div>
+        `;
+
+        screen.classList.add("active");
+
+        startTarget();
+
+    }
+
+    else if(game === "tic"){
+
+        title.textContent = "Tic-Tac-Toe";
+        icon.textContent = "❌⭕";
+
+        panel.innerHTML = `
+            <h2>❌⭕ Tic-Tac-Toe</h2>
+
+            <p class="game-panel-sub">
+                You are X. AIFA is O.
+            </p>
+
+            <div class="game-score" id="ticStatus">
+                Your turn
+            </div>
+
+            <div class="tic-board"
+                 id="ticBoard">
+            </div>
+
+            <div class="game-actions">
+                <button class="game-btn primary"
+                        onclick="openGame('tic')">
+                    Restart
+                </button>
+            </div>
+        `;
+
+        screen.classList.add("active");
+
+        startTic();
+
+    }
+}
+      
+function startRunner(){
+    if(gameTimer)clearInterval(gameTimer); if(gameAnimation)cancelAnimationFrame(gameAnimation);
+    const c=document.getElementById('runnerCanvas'); if(!c)return; const x=c.getContext('2d');
+    let player={x:70,y:205,w:28,h:38,vy:0,onGround:true},obs=[],score=0,over=false,frame=0;
+    function jump(){if(player.onGround&&!over){player.vy=-12;player.onGround=false;}}
+    c.onpointerdown=jump; document.onkeydown=e=>{if(e.code==='Space'){e.preventDefault();jump();}};
+    function loop(){
+        if(over)return; frame++; player.vy+=.55; player.y+=player.vy; if(player.y>=205){player.y=205;player.vy=0;player.onGround=true;}
+        if(frame%85===0)obs.push({x:c.width+20,w:20+Math.random()*18,h:25+Math.random()*30});
+        obs.forEach(o=>o.x-=5); obs=obs.filter(o=>o.x>-40); score++;
+        for(const o of obs){if(player.x<o.x+o.w&&player.x+player.w>o.x&&player.y+player.h>230-o.h){over=true;break;}}
+        x.clearRect(0,0,c.width,c.height); x.fillStyle='#151515';x.fillRect(0,0,c.width,c.height); x.strokeStyle='#f5c542';x.beginPath();x.moveTo(0,244);x.lineTo(c.width,244);x.stroke();
+        x.fillStyle='#f5c542';x.fillRect(player.x,player.y,player.w,player.h); obs.forEach(o=>{x.fillRect(o.x,230-o.h,o.w,o.h);});
+        document.getElementById('runnerScore').textContent=over?'Game Over — Score: '+Math.floor(score/10):'Score: '+Math.floor(score/10);
+        if(!over)gameAnimation=requestAnimationFrame(loop);
+    } loop();
+}
+
+function startBall(){
+    if(gameTimer)clearInterval(gameTimer);
+    const c=document.getElementById('ballCanvas'); if(!c)return; const x=c.getContext('2d'); let score=0,time=20,ball={x:120,y:120,r:24};
+    function move(){ball.x=40+Math.random()*(c.width-80);ball.y=40+Math.random()*(c.height-80);}
+    function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='#111';x.fillRect(0,0,c.width,c.height);x.beginPath();x.arc(ball.x,ball.y,ball.r,0,Math.PI*2);x.fillStyle='#f5c542';x.fill();x.fillStyle='#111';x.font='bold 15px Arial';x.textAlign='center';x.fillText('AIFA',ball.x,ball.y+5);}
+    c.onpointerdown=e=>{if(time<=0)return;const r=c.getBoundingClientRect(),mx=(e.clientX-r.left)*c.width/r.width,my=(e.clientY-r.top)*c.height/r.height;if(Math.hypot(mx-ball.x,my-ball.y)<=ball.r){score++;move();draw();}};
+    gameTimer=setInterval(()=>{time--;document.getElementById('ballScore').textContent=`Score: ${score} | Time: ${time}`;if(time<=0){clearInterval(gameTimer);gameTimer=null;document.getElementById('ballScore').textContent=`Time up! Final score: ${score}`;}},1000);move();draw();
+}
+
+function startTarget(){
+    if(gameTimer)clearInterval(gameTimer);
+    const c=document.getElementById('targetCanvas'); if(!c)return; const x=c.getContext('2d'); let score=0,time=20,target={x:100,y:100,r:25};
+    function move(){target.x=35+Math.random()*(c.width-70);target.y=35+Math.random()*(c.height-70);}
+    function draw(){x.clearRect(0,0,c.width,c.height);x.fillStyle='#111';x.fillRect(0,0,c.width,c.height);x.beginPath();x.arc(target.x,target.y,target.r,0,Math.PI*2);x.fillStyle='#f5c542';x.fill();x.beginPath();x.arc(target.x,target.y,10,0,Math.PI*2);x.fillStyle='#111';x.fill();}
+    c.onpointerdown=e=>{if(time<=0)return;const r=c.getBoundingClientRect(),mx=(e.clientX-r.left)*c.width/r.width,my=(e.clientY-r.top)*c.height/r.height;if(Math.hypot(mx-target.x,my-target.y)<=target.r){score++;move();draw();document.getElementById('targetScore').textContent=`Score: ${score} | Time: ${time}`;}};
+    gameTimer=setInterval(()=>{time--;document.getElementById('targetScore').textContent=`Score: ${score} | Time: ${time}`;if(time<=0){clearInterval(gameTimer);gameTimer=null;document.getElementById('targetScore').textContent=`Time up! Final score: ${score}`;}},1000);move();draw();
+}
+
+function startTic(){
+    const board=document.getElementById('ticBoard'),status=document.getElementById('ticStatus');let cells=Array(9).fill(''),turn=true,ended=false;
+    function win(a,b,c){return cells[a]&&cells[a]===cells[b]&&cells[b]===cells[c];}
+    function winner(){for(const [a,b,c] of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]])if(win(a,b,c))return cells[a];return cells.every(Boolean)?'draw':null;}
+    function render(){board.innerHTML='';cells.forEach((v,i)=>{const b=document.createElement('button');b.className='tic-cell';b.textContent=v;b.onclick=()=>play(i);board.appendChild(b);});}
+    function play(i){if(cells[i]||!turn||ended)return;cells[i]='X';turn=false;render();let w=winner();if(w)return finish(w);status.textContent='AIFA is thinking...';setTimeout(()=>{if(ended)return;let empty=cells.map((v,i)=>v?null:i).filter(v=>v!==null);if(!empty.length)return;let move=empty[Math.floor(Math.random()*empty.length)];cells[move]='O';turn=true;render();w=winner();if(w)finish(w);else status.textContent='Your turn';},300);}
+    function finish(w){ended=true;status.textContent=w==='draw'?'Draw!':w==='X'?'You win! 🎉':'AIFA wins!';}
+    render();
+}
+
+ /* FEEDBACK & SUGGESTIONS */
+
+let selectedFeedbackType = "suggestion";
+
+function selectFeedbackType(button, type){
+
+    selectedFeedbackType = type;
+
+    document.querySelectorAll(".feedback-option").forEach(option => {
+        option.classList.remove("active");
+    });
+
+    button.classList.add("active");
+}
+
+function submitFeedback(){
+
+    const name = document.getElementById("feedbackName").value.trim();
+    const message = document.getElementById("feedbackMessage").value.trim();
+    const status = document.getElementById("feedbackStatus");
+
+    if(!message){
+        status.textContent = "⚠️ Please write your suggestion or feedback first.";
+        return;
+    }
+
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwckhWRHx_nzrNZnAhmjHmjzOL2LsZgyRrP7gV9omF-NeGYVymZz2xD3MtWBTxIhCrG9w/exec";
+
+    if(SCRIPT_URL === "YOUR_APPS_SCRIPT_WEB_APP_URL"){
+        status.textContent = "⚙️ Feedback connection is almost ready. Add the Apps Script Web App URL first.";
+        return;
+    }
+
+    status.textContent = "⏳ Sending feedback...";
+
+    fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+            type: selectedFeedbackType,
+            name: name,
+            message: message
+        })
+    })
+    .then(() => {
+        status.textContent = "✅ Feedback sent successfully!";
+        document.getElementById("feedbackMessage").value = "";
+        document.getElementById("feedbackName").value = "";
+    })
+    .catch(() => {
+        status.textContent = "❌ Could not send feedback. Please try again.";
+    });
+}
+/* ===== OPEN FULL SCREEN GAME INTERFACE ===== */
+
+function openGameInterface(){
+
+    const gameScreen = document.getElementById("gameFullscreen");
+
+    if(gameScreen){
+        gameScreen.classList.add("active");
+    }
+
+}
+
+
+/* ===== CLOSE FULL SCREEN GAME INTERFACE ===== */
+
+function closeGameInterface(){
+
+    const gameScreen = document.getElementById("gameFullscreen");
+
+    if(gameScreen){
+        gameScreen.classList.remove("active");
+    }
+
+    const gameArea = document.getElementById("newGameArea");
+
+    if(gameArea){
+        gameArea.innerHTML = "";
+    }
+
+}
+</script>
+<!-- DEDICATED GAME SCREEN -->
+<div class="game-screen" id="dedicatedGameScreen">
+
+    <div class="game-screen-top">
+
+        <div class="game-screen-title">
+            <span class="icon" id="dedicatedGameIcon">🎮</span>
+
+            <h2 id="dedicatedGameTitle">
+                AIFA Offline Game
+            </h2>
+        </div>
+
+        <button class="game-back" onclick="closeDedicatedGame()">
+            ← Back to Games
+        </button>
+
+    </div>
+
+    <div class="game-screen-body">
+
+        <div class="game-panel" id="dedicatedGamePanel">
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
